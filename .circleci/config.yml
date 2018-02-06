@@ -31,7 +31,7 @@ jobs:
           name: run static analysis
           command: |
             . venv/bin/activate
-            python test_fizzbuzz.py
+            flake8 test_fizzbuzz.py
 
       - run:
           name: run test
