@@ -48,17 +48,17 @@ jobs:
             . venv/bin/activate
             flake8 test_fizzbuzz.py
       
-unit_tests:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Run Unittest
-          command: |
-            python -m venv venv
-            . venv/bin/activate
-            python test_fizzbuzz.py
+  unit_tests:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+            at: .
+        - run:
+            name: Run Unittest
+            command: |
+              python -m venv venv
+              . venv/bin/activate
+              python test_fizzbuzz.py
   
 workflows:
   version: 2
