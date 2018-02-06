@@ -41,24 +41,28 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - restore_cache:
+          keys:
+            - py-deps-{{ checksum "requirements.txt"}}
       - run:
           name: Run Static Analysis
           command: |
-            python -m venv venv
             . venv/bin/activate
             flake8 test_fizzbuzz.py
       
   unit_tests:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: .
-        - run:
-            name: Run Unittest
-            command: |
-              python -m venv venv
-              . venv/bin/activate
-              python test_fizzbuzz.py
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          keys:
+            - py-deps-{{ checksum "requirements.txt"}}
+      - run:
+          name: Run Unittest
+          command: |
+            . venv/bin/activate
+            python test_fizzbuzz.py
   
 workflows:
   version: 2
